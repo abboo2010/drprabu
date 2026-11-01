@@ -209,6 +209,12 @@ input,select,textarea{font:16px var(--f-body);color:var(--text);background:var(-
 textarea{min-height:120px;resize:vertical}
 input::placeholder,textarea::placeholder{color:var(--faint)}
 .status{font-size:14px;color:var(--gold);min-height:20px}
+.confirm{border:1px solid var(--line-strong);border-radius:22px;padding:clamp(20px,3vw,32px);background:#fff;box-shadow:var(--shadow);display:grid;gap:14px;justify-items:start;min-width:0;outline:none}
+.confirm .logoplate{max-width:260px}
+.confirm h3{font-size:26px}
+.confirm p{color:var(--muted);overflow-wrap:anywhere}
+.confirm .small{font-size:14px}
+.confirm .small a{color:var(--teal);font-weight:600}
 
 /* footer */
 .logoplate{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 18px;max-width:300px}.logoplate img{display:block;width:100%;height:auto}
@@ -766,6 +772,7 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
   var WA_NUMBER = "60126228114";      /* WhatsApp, digits only with country code, e.g. 60123456789 */
   var PHONE = "6088518892";          /* Clinic phone, digits only with country code, e.g. 6088123456 */
   var W3_KEY = "";         /* Web3Forms access key (free at web3forms.com) for the enquiry form */
+  var FORM_EMAIL = "abboo2010@gmail.com"; /* enquiries are emailed here via FormSubmit (no key needed); change to the clinic email at launch */
   var MAP_QUERY = "Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah";
   /* ---- Temporary sign-in lock (a deterrent only, not real security). Set LOCK_ENABLED=false to remove. ---- */
   var LOCK_ENABLED = true;
@@ -800,7 +807,7 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
   if(WA_NUMBER){ cbW.href=waLink('Hello Dr Prabu, I would like to enquire about an appointment.'); cbW.target='_blank'; cbW.rel='noopener'; }
   document.getElementById('mapLink').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(MAP_QUERY);
 
-  /* Enquiry form: sends by Web3Forms when a key is set, otherwise shows a WhatsApp fallback or a preview note. */
+  /* Enquiry form: emails FORM_EMAIL through FormSubmit (the first submission sends a one-time activation link to that inbox). Uses Web3Forms instead if W3_KEY is set. */
   var form = document.getElementById('enq'), status = document.getElementById('status');
   function waFallback(msg){
     var link = waLink(msg);
@@ -808,25 +815,52 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
     var a = document.createElement('a'); a.href = link; a.target = '_blank'; a.rel = 'noopener'; a.className = 'btn btn-ghost'; a.style.marginTop = '8px'; a.textContent = 'Send via WhatsApp instead';
     status.appendChild(document.createElement('br')); status.appendChild(a);
   }
+  function showConfirm(name, phone){
+    var logoEl = document.querySelector('footer .logoplate img');
+    var box = document.createElement('div'); box.className = 'confirm'; box.setAttribute('role','status'); box.tabIndex = -1;
+    var plate = document.createElement('div'); plate.className = 'logoplate';
+    var img = document.createElement('img'); img.src = logoEl ? logoEl.src : 'logo.jpg'; img.alt = 'Dr. Prabu Rau Neurosurgery Clinic. Brain, spine, nerve, pain.';
+    plate.appendChild(img);
+    var h = document.createElement('h3'); h.textContent = 'Thank you, ' + name + '.';
+    var p1 = document.createElement('p'); p1.textContent = 'Your appointment request has been sent to the clinic team of Dr. Prabu Rau Sriram. We will contact you on ' + phone + ' to arrange a suitable time.';
+    var p2 = document.createElement('p'); p2.className = 'small';
+    p2.appendChild(document.createTextNode('Need to speak to someone sooner? Call '));
+    var tel = document.createElement('a'); tel.href = 'tel:+' + (PHONE || '6088518892'); tel.textContent = '088-518892'; p2.appendChild(tel);
+    p2.appendChild(document.createTextNode('. In an emergency, go to the nearest emergency department or call 999.'));
+    var again = document.createElement('button'); again.type = 'button'; again.className = 'btn btn-ghost'; again.textContent = 'Send another request';
+    again.addEventListener('click', function(){ box.remove(); form.hidden = false; form.reset(); status.textContent = ''; });
+    box.appendChild(plate); box.appendChild(h); box.appendChild(p1); box.appendChild(p2); box.appendChild(again);
+    form.hidden = true;
+    form.parentNode.insertBefore(box, form);
+    box.focus();
+  }
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var d = new FormData(form);
     if(d.get('botcheck')) return;
-    if(!(d.get('name')||'').toString().trim() || !(d.get('phone')||'').toString().trim()){
+    var nm = (d.get('name')||'').toString().trim(), ph = (d.get('phone')||'').toString().trim();
+    if(!nm || !ph){
       status.textContent = 'Please add your name and phone number so the clinic can reach you.'; return;
     }
-    var msg = 'Appointment request\nName: '+d.get('name')+'\nPhone: '+d.get('phone')+'\nPatient: '+d.get('who')+'\nConcern: '+d.get('area')+'\nMessage: '+(d.get('msg')||'-');
+    var msg = 'Appointment request\nName: '+nm+'\nPhone: '+ph+'\nPatient: '+d.get('who')+'\nConcern: '+d.get('area')+'\nMessage: '+(d.get('msg')||'-');
     status.textContent = '';
-    if(!W3_KEY){
+    if(!W3_KEY && !FORM_EMAIL){
       status.textContent = 'Preview only: the form is not connected yet, so nothing was sent. It will email the clinic once launched.';
       waFallback(msg); return;
     }
     var sb = form.querySelector('button[type=submit]'); sb.disabled = true; status.textContent = 'Sending…';
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify({access_key:W3_KEY,subject:'New appointment request - website (Contact page)',from_name:'Dr Prabu website',name:d.get('name'),phone:d.get('phone'),patient:d.get('who'),concern:d.get('area'),message:d.get('msg')||'-'})})
+    var url, payload;
+    if(W3_KEY){
+      url = 'https://api.web3forms.com/submit';
+      payload = {access_key:W3_KEY,subject:'New appointment request - website (Contact page)',from_name:'Dr Prabu website',name:nm,phone:ph,patient:d.get('who'),concern:d.get('area'),message:d.get('msg')||'-'};
+    } else {
+      url = 'https://formsubmit.co/ajax/' + FORM_EMAIL;
+      payload = {_subject:'New appointment request - Dr Prabu website (Contact page)',_template:'table',_captcha:'false',Name:nm,Phone:ph,Patient:d.get('who'),Concern:d.get('area'),Message:d.get('msg')||'-'};
+    }
+    fetch(url,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
     .then(function(r){ return r.json(); })
     .then(function(j){
-      if(j && j.success){ status.textContent = 'Thank you. Your request has been sent and the clinic will contact you.'; form.reset(); }
+      if(j && (j.success === true || j.success === 'true')){ status.textContent = ''; showConfirm(nm, ph); }
       else throw new Error('fail');
     })
     .catch(function(){ status.textContent = 'Sorry, the request could not be sent. Please call the clinic or use WhatsApp.'; waFallback(msg); })
