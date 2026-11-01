@@ -107,6 +107,14 @@ nav.main a.on{color:#fff;background:var(--teal)}
 .clinicbar a:hover{text-decoration:underline}
 @media (max-width:900px){.clinicbar{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.clinicbar{grid-template-columns:1fr}}
+.cliniccard{margin-top:72px}
+.cliniccard .eyebrow{display:block;margin-bottom:14px}
+.cliniccard + footer{margin-top:56px}
+.clinicbar.foot{margin-top:0;grid-template-columns:repeat(3,1fr)}
+.clinicbar.foot .wide{grid-column:span 2}
+.clinicbar.foot .hosp{font-weight:600}
+@media (max-width:900px){.clinicbar.foot{grid-template-columns:1fr 1fr}.clinicbar.foot .wide{grid-column:1/-1}}
+@media (max-width:560px){.clinicbar.foot{grid-template-columns:1fr}}
 
 /* focus panels */
 .quad{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -399,12 +407,6 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
   <div class="ribbon">
     <p>Consulting hospital</p>
     <ul><li>Gleneagles Hospital Kota Kinabalu</li></ul>
-  </div>
-  <div class="clinicbar">
-    <div class="cell"><small>Clinic address</small><div class="val">Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah</div></div>
-    <div class="cell"><small>Phone</small><div class="val"><a href="tel:+6088518892">088-518892</a></div></div>
-    <div class="cell"><small>WhatsApp</small><div class="val"><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></div></div>
-    <div class="cell"><small>Email</small><div class="val"><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></div></div>
   </div>
 
   <div class="sec">
@@ -733,6 +735,17 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
 </section>
 
 </main>
+
+<section class="cliniccard wrap" id="clinic-details" aria-label="Clinic details">
+  <span class="eyebrow">Visit the clinic</span>
+  <div class="clinicbar foot">
+    <div class="cell"><small>Consulting hospital</small><div class="val hosp">Gleneagles Hospital Kota Kinabalu</div></div>
+    <div class="cell wide"><small>Clinic address</small><div class="val">Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah</div></div>
+    <div class="cell"><small>Phone</small><div class="val"><a href="tel:+6088518892">088-518892</a></div></div>
+    <div class="cell"><small>WhatsApp</small><div class="val"><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></div></div>
+    <div class="cell"><small>Email</small><div class="val"><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></div></div>
+  </div>
+</section>
 
 <footer class="wrap">
   <div class="row" style="align-items:center"><div class="logoplate"><img src="logo.jpg" alt="Dr. Prabu Rau Neurosurgery Clinic. Brain, spine, nerve, pain." width="400" height="268"></div><span>Dr Prabu Rau Sriram<br>Consultant Neurosurgeon &amp; Neurospine Surgeon<br>MMC No. 50434</span></div>
