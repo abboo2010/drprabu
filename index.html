@@ -858,12 +858,18 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
       payload = {_subject:'New appointment request - Dr Prabu website (Contact page)',_template:'table',_captcha:'false',Name:nm,Phone:ph,Patient:d.get('who'),Concern:d.get('area'),Message:d.get('msg')||'-'};
     }
     fetch(url,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
-    .then(function(r){ return r.json(); })
+    .then(function(r){ return r.json().catch(function(){ return {success:false,message:'unexpected reply from the form service (status '+r.status+')'}; }); })
     .then(function(j){
       if(j && (j.success === true || j.success === 'true')){ status.textContent = ''; showConfirm(nm, ph); }
-      else throw new Error('fail');
+      else throw new Error((j && j.message) ? j.message : 'the form service refused the request');
     })
-    .catch(function(){ status.textContent = 'Sorry, the request could not be sent. Please call the clinic or use WhatsApp.'; waFallback(msg); })
+    .catch(function(err){
+      var why = (err && err.message) ? err.message : 'unknown error';
+      if(/failed to fetch|networkerror|load failed/i.test(why)) why = 'could not reach the form service';
+      if(window.console) console.error('Enquiry form error:', err);
+      status.textContent = 'Sorry, the request could not be sent. Please call the clinic or use WhatsApp. (' + why + ')';
+      waFallback(msg);
+    })
     .then(function(){ sb.disabled = false; });
   });
 
