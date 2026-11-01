@@ -99,21 +99,6 @@ nav.main a.on{color:#fff;background:var(--teal)}
 .ribbon{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 36px;align-items:center;justify-content:space-between;border-block:1px solid var(--line);padding-block:20px}
 .ribbon p{color:var(--faint);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 .ribbon ul{display:flex;flex-wrap:wrap;gap:8px 28px;list-style:none;margin:0;padding:0;font-family:var(--f-display);font-size:18px;color:var(--text)}
-.clinicbar{margin-top:20px;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:12px}
-.clinicbar .cell{border:1px solid var(--line);border-radius:14px;background:#fff;padding:16px 18px;min-width:0;box-shadow:0 8px 24px rgba(16,52,92,.07)}
-.clinicbar small{display:block;color:var(--faint);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.clinicbar .val{font-size:15.5px;overflow-wrap:anywhere}
-.clinicbar a{text-decoration:none}
-.clinicbar a:hover{text-decoration:underline}
-@media (max-width:900px){.clinicbar{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.clinicbar{grid-template-columns:1fr}}
-.cliniccard{margin-top:72px}
-.cliniccard .eyebrow{display:block;margin-bottom:14px}
-.cliniccard + footer{margin-top:56px}
-.clinicbar.foot{margin-top:0;grid-template-columns:repeat(3,1fr)}
-.clinicbar.foot .wide{grid-column:1/-1}
-@media (max-width:900px){.clinicbar.foot{grid-template-columns:1fr 1fr}.clinicbar.foot .wide{grid-column:1/-1}}
-@media (max-width:560px){.clinicbar.foot{grid-template-columns:1fr}}
 
 /* focus panels */
 .quad{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -218,9 +203,29 @@ input::placeholder,textarea::placeholder{color:var(--faint)}
 
 /* footer */
 .logoplate{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 18px;max-width:300px}.logoplate img{display:block;width:100%;height:auto}
-footer{margin-top:96px;border-top:1px solid var(--line);padding-block:36px 100px;color:var(--faint);font-size:14px;display:grid;gap:10px}
-footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--text)}
+.site-footer{margin-top:96px;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));background:#0F2338;color:rgba(255,255,255,.78);font-size:15px;border-top:4px solid var(--teal)}
+.site-footer .wrap{padding-block:56px 0}
+.fgrid{display:grid;grid-template-columns:1.25fr .8fr 1.25fr 1.1fr;gap:40px}
+.fgrid > *{min-width:0}
+.site-footer .fh{font:600 12px var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:#7FD6CC;margin:0 0 14px}
+.site-footer .logoplate{max-width:240px;margin-bottom:18px;border:0}
+.site-footer .who{display:grid;gap:4px}
+.site-footer .who b{font:600 19px var(--f-display);color:#fff}
+.site-footer .who span{color:rgba(255,255,255,.7);font-size:14px}
+.flinks{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.site-footer a:not(.btn){color:rgba(255,255,255,.86);text-decoration:none;display:inline-block;padding-block:6px}
+.site-footer a:not(.btn):hover{color:#fff;text-decoration:underline}
+.site-footer address{font-style:normal;line-height:1.6;margin-bottom:6px}
+.site-footer .dir{color:#7FD6CC!important;font-weight:600}
+.fcontact .flinks{gap:12px}
+.fcontact .flinks a:not(.btn){padding-block:2px;font-size:16px}
+.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.site-footer .btn{margin-top:18px;padding:12px 20px}
+.fbottom{margin-top:48px;padding-block:22px 96px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;align-items:flex-start;gap:12px 32px;flex-wrap:wrap;font-size:13.5px;color:rgba(255,255,255,.66)}
+.fbottom p{max-width:64ch}
+.fbottom strong{color:#fff;font-weight:600}
+@media (max-width:900px){.fgrid{grid-template-columns:1fr 1fr;gap:32px}.fbrand{grid-column:1/-1}}
+@media (max-width:560px){.fgrid{grid-template-columns:1fr}.site-footer .wrap{padding-top:44px}}
 
 /* floating whatsapp */
 .wa{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;align-items:center;gap:8px;background:#25C16A;color:#04210F;font:600 14px var(--f-body);padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 12px 28px rgba(16,52,92,.3)}
@@ -743,20 +748,44 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
 
 </main>
 
-<section class="cliniccard wrap" id="clinic-details" aria-label="Clinic details">
-  <span class="eyebrow">Visit the clinic</span>
-  <div class="clinicbar foot">
-    <div class="cell wide"><small>Clinic address</small><div class="val">Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah</div></div>
-    <div class="cell"><small>Phone</small><div class="val"><a href="tel:+6088518892">088-518892</a></div></div>
-    <div class="cell"><small>WhatsApp</small><div class="val"><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></div></div>
-    <div class="cell"><small>Email</small><div class="val"><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></div></div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <div class="logoplate"><img src="logo.jpg" alt="Dr. Prabu Rau Neurosurgery Clinic. Brain, spine, nerve, pain." width="400" height="268"></div>
+        <div class="who"><b>Dr. Prabu Rau Sriram</b><span>Consultant Neurosurgeon &amp; Neurospine Surgeon</span><span>MMC No. 50434</span><span>Brain · Spine · Nerve · Pain</span></div>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="fh">Explore</h2>
+        <ul class="flinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#conditions">Conditions &amp; Treatments</a></li>
+          <li><a href="#learn">Learn</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="fh">Visit the clinic</h2>
+        <address>Suite No. 114, Level 1, Block A 1,<br>Gleneagles Hospital Kota Kinabalu,<br>Riverson@Sembulan,<br>88100 Kota Kinabalu, Sabah</address>
+        <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Gleneagles+Hospital+Kota+Kinabalu%2C+Riverson%40Sembulan%2C+88100+Kota+Kinabalu%2C+Sabah" target="_blank" rel="noopener">Get directions &rarr;</a>
+      </div>
+      <div class="fcontact">
+        <h2 class="fh">Contact</h2>
+        <ul class="flinks">
+          <li><span class="lbl">Phone</span><a href="tel:+6088518892">088-518892</a></li>
+          <li><span class="lbl">WhatsApp</span><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></li>
+          <li><span class="lbl">Email</span><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></li>
+        </ul>
+        <a class="btn btn-primary" href="#contact">Book a consultation</a>
+      </div>
+    </div>
+    <div class="fbottom">
+      <p><strong>General information only, not medical advice.</strong> In an emergency, go to the nearest emergency department or call 999.</p>
+      <p>&copy; <span id="yr">2026</span> Dr Prabu Rau Neurosurgery Clinic &middot; Website by Click 4 Tech Solutions PLT</p>
+    </div>
   </div>
-</section>
-
-<footer class="wrap">
-  <div class="row" style="align-items:center"><div class="logoplate"><img src="logo.jpg" alt="Dr. Prabu Rau Neurosurgery Clinic. Brain, spine, nerve, pain." width="400" height="268"></div><span>Dr Prabu Rau Sriram<br>Consultant Neurosurgeon &amp; Neurospine Surgeon<br>MMC No. 50434</span></div>
-  <div class="row"><span>This site gives general information and is not medical advice. In an emergency, call 999.</span><span><a href="#home">Home</a> · <a href="#about">About</a> · <a href="#conditions">Conditions</a> · <a href="#learn">Learn</a> · <a href="#gallery">Gallery</a> · <a href="#contact">Contact</a></span></div>
-  <div class="row"><span>Website by Click 4 Tech Solutions PLT</span></div>
 </footer>
 
 <a class="wa" href="#contact" id="waFloat" aria-label="Contact the clinic">
@@ -806,6 +835,7 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
   if(PHONE){ cbC.href='tel:+'+PHONE; }
   if(WA_NUMBER){ cbW.href=waLink('Hello Dr Prabu, I would like to enquire about an appointment.'); cbW.target='_blank'; cbW.rel='noopener'; }
   document.getElementById('mapLink').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(MAP_QUERY);
+  var yr = document.getElementById('yr'); if(yr) yr.textContent = new Date().getFullYear();
 
   /* Enquiry form: emails FORM_EMAIL through FormSubmit (the first submission sends a one-time activation link to that inbox). Uses Web3Forms instead if W3_KEY is set. */
   var form = document.getElementById('enq'), status = document.getElementById('status');
