@@ -99,6 +99,14 @@ nav.main a.on{color:#fff;background:var(--teal)}
 .ribbon{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 36px;align-items:center;justify-content:space-between;border-block:1px solid var(--line);padding-block:20px}
 .ribbon p{color:var(--faint);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 .ribbon ul{display:flex;flex-wrap:wrap;gap:8px 28px;list-style:none;margin:0;padding:0;font-family:var(--f-display);font-size:18px;color:var(--text)}
+.clinicbar{margin-top:20px;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:12px}
+.clinicbar .cell{border:1px solid var(--line);border-radius:14px;background:#fff;padding:16px 18px;min-width:0;box-shadow:0 8px 24px rgba(16,52,92,.07)}
+.clinicbar small{display:block;color:var(--faint);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.clinicbar .val{font-size:15.5px;overflow-wrap:anywhere}
+.clinicbar a{text-decoration:none}
+.clinicbar a:hover{text-decoration:underline}
+@media (max-width:900px){.clinicbar{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.clinicbar{grid-template-columns:1fr}}
 
 /* focus panels */
 .quad{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -389,8 +397,14 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
   </div>
 
   <div class="ribbon">
-    <p>Consulting hospitals <span class="tbc">To confirm</span></p>
-    <ul><li>Gleneagles Kota Kinabalu</li><li>KPJ Sabah Specialist Hospital</li></ul>
+    <p>Consulting hospital</p>
+    <ul><li>Gleneagles Hospital Kota Kinabalu</li></ul>
+  </div>
+  <div class="clinicbar">
+    <div class="cell"><small>Clinic address</small><div class="val">Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah</div></div>
+    <div class="cell"><small>Phone</small><div class="val"><a href="tel:+6088518892">088-518892</a></div></div>
+    <div class="cell"><small>WhatsApp</small><div class="val"><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></div></div>
+    <div class="cell"><small>Email</small><div class="val"><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></div></div>
   </div>
 
   <div class="sec">
@@ -498,7 +512,11 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
         <div><dt>Special interests</dt><dd>Vascular &amp; Paediatric Neurosurgery</dd></div>
         <div><dt>MMC registration</dt><dd>No. 50434</dd></div>
         <div><dt>Qualifications</dt><dd>Degrees and fellowships <span class="tbc">To confirm</span></dd></div>
-        <div><dt>Hospitals</dt><dd>Gleneagles Kota Kinabalu · KPJ Sabah Specialist Hospital <span class="tbc">To confirm</span></dd></div>
+        <div><dt>Consulting hospital</dt><dd>Gleneagles Hospital Kota Kinabalu</dd></div>
+        <div><dt>Clinic address</dt><dd>Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah</dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+6088518892">088-518892</a></dd></div>
+        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></dd></div>
         <div><dt>Memberships</dt><dd>Professional societies <span class="tbc">To confirm</span></dd></div>
         <div><dt>Languages</dt><dd>English, Bahasa Malaysia <span class="tbc">To confirm</span></dd></div>
       </dl>
@@ -674,11 +692,11 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
   </div>
   <div class="contact">
     <div class="info">
-      <div class="row"><small>Clinic address</small><div class="val">Address to be added <span class="tbc">To confirm</span></div></div>
-      <div class="row"><small>Phone</small><div class="val">Number to be added <span class="tbc">To confirm</span></div></div>
-      <div class="row"><small>WhatsApp</small><div class="val">Number to be added <span class="tbc">To confirm</span></div></div>
-      <div class="row"><small>Email</small><div class="val">Appointment email to be added <span class="tbc">To confirm</span></div></div>
-      <div class="row"><small>Consulting hospitals</small><div class="val">Gleneagles Kota Kinabalu<br>KPJ Sabah Specialist Hospital <span class="tbc">To confirm</span></div></div>
+      <div class="row"><small>Clinic address</small><div class="val">Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah</div></div>
+      <div class="row"><small>Phone</small><div class="val"><a href="tel:+6088518892">088-518892</a></div></div>
+      <div class="row"><small>WhatsApp</small><div class="val"><a href="https://wa.me/60126228114" target="_blank" rel="noopener">+6012 6228114</a></div></div>
+      <div class="row"><small>Email</small><div class="val"><a href="mailto:clinic@drprabu.my">clinic@drprabu.my</a></div></div>
+      <div class="row"><small>Consulting hospital</small><div class="val">Gleneagles Hospital Kota Kinabalu</div></div>
       <div class="emerg"><strong>Emergency?</strong> Sudden severe headache, weakness, seizure, loss of speech or consciousness, or back pain with loss of bladder or bowel control: go to the nearest emergency department or call 999. Do not wait for a clinic appointment.</div>
     </div>
     <form class="f" id="enq" novalidate>
@@ -708,7 +726,7 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
     <div class="mapcard">
       <h3>Find the clinic</h3>
       <div class="mapart"><svg viewBox="0 0 320 180" aria-hidden="true"><rect width="320" height="180" fill="#E9F1F7"/><path d="M0 120 C60 100 110 140 170 110 S270 90 320 100" stroke="#fff" stroke-width="14" fill="none"/><path d="M60 0 L90 180" stroke="#fff" stroke-width="10"/><path d="M200 0 L230 180" stroke="#fff" stroke-width="10"/><path d="M0 40 H320" stroke="#fff" stroke-width="8"/><path d="M0 120 C60 100 110 140 170 110 S270 90 320 100" stroke="#C9DAE8" stroke-width="2" fill="none" stroke-dasharray="6 6"/><g transform="translate(160 72)"><path d="M0 40 C-22 12 -22 -22 0 -22 C22 -22 22 12 0 40Z" fill="#0B8178"/><circle cx="0" cy="-4" r="8" fill="#fff"/></g></svg></div>
-      <p>The exact clinic address will be added once confirmed. Until then, the button below searches Google Maps for the clinic.</p>
+      <p>Suite No. 114, Level 1, Block A 1, Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah.</p>
       <a class="btn btn-ghost" id="mapLink" href="https://www.google.com/maps/search/?api=1&amp;query=Dr+Prabu+Rau+Neurosurgery+Clinic+Kota+Kinabalu" target="_blank" rel="noopener">Open in Google Maps</a>
     </div>
   </div>
@@ -732,10 +750,10 @@ nav.main .signout:hover{color:var(--text);background:var(--glass)}
 <script>
 (function(){
   /* ---- Clinic settings: fill these in when confirmed ---- */
-  var WA_NUMBER = "";      /* WhatsApp, digits only with country code, e.g. 60123456789 */
-  var PHONE = "";          /* Clinic phone, digits only with country code, e.g. 6088123456 */
+  var WA_NUMBER = "60126228114";      /* WhatsApp, digits only with country code, e.g. 60123456789 */
+  var PHONE = "6088518892";          /* Clinic phone, digits only with country code, e.g. 6088123456 */
   var W3_KEY = "";         /* Web3Forms access key (free at web3forms.com) for the enquiry form */
-  var MAP_QUERY = "Dr Prabu Rau Neurosurgery Clinic Kota Kinabalu"; /* replace with the clinic address */
+  var MAP_QUERY = "Gleneagles Hospital Kota Kinabalu, Riverson@Sembulan, 88100 Kota Kinabalu, Sabah";
   /* ---- Temporary sign-in lock (a deterrent only, not real security). Set LOCK_ENABLED=false to remove. ---- */
   var LOCK_ENABLED = true;
   var LOCK_USER_HASH = "ee1d219e11f3c17d299f6ab7cd07808f2045d3820b0a1f2f24f953a911c2350f";
